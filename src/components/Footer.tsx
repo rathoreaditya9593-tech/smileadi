@@ -33,7 +33,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="md:col-span-1">
             <span className="font-heading text-2xl font-bold text-gradient mb-4 block">
-              Ashish Sharma.
+              Aditya Rathore.
             </span>
             <p className="text-muted-foreground text-sm leading-relaxed mb-6">
               Full Stack Developer passionate about creating exceptional digital experiences. Always learning, always coding, always improving.
@@ -76,15 +76,15 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-center gap-2 text-muted-foreground text-sm">
                 <Mail size={16} className="text-primary" />
-                ashish802@gmail.com
+                rathoreaditya9617@gmail.com
               </li>
               <li className="flex items-center gap-2 text-muted-foreground text-sm">
                 <Phone size={16} className="text-primary" />
-                +91 6289028927
+                +91 98765 43210
               </li>
               <li className="flex items-center gap-2 text-muted-foreground text-sm">
                 <MapPin size={16} className="text-primary" />
-                Panipat, IN
+                Bhopal, India
               </li>
             </ul>
             <Button
@@ -105,10 +105,10 @@ const Footer = () => {
           <div>
             <h4 className="font-heading font-semibold text-foreground mb-4">Get In Touch</h4>
             <p className="text-muted-foreground text-sm mb-4">
-              santosh9090@gmail.com
+              rathoreaditya9617@gmail.com
             </p>
             <p className="text-muted-foreground text-sm mb-4">
-              Panipat, IN
+              Bhopal, India
             </p>
             <Button
               variant="outline"
@@ -127,7 +127,7 @@ const Footer = () => {
         {/* Bottom */}
         <div className="pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
           <span className="text-muted-foreground text-sm flex items-center gap-1">
-            © {currentYear} Ashish. Made with <Heart size={14} className="text-primary" /> Using React & Tailwind CSS
+            © {currentYear} Aditya. Made with <Heart size={14} className="text-primary" /> Using React & Tailwind CSS
           </span>
         </div>
       </div>
