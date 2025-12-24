@@ -1,15 +1,27 @@
-import { Coffee, Code, Music, Gamepad2, Book, Plane } from 'lucide-react';
+import { useState } from 'react';
+import { GraduationCap, Code2, Award } from 'lucide-react';
 
 const funFacts = [
-  { icon: Coffee, label: 'Coffee Consumed', value: '1000+', suffix: 'cups' },
-  { icon: Code, label: 'Lines of Code', value: '100K+', suffix: 'written' },
-  { icon: Music, label: 'Coding Playlists', value: '50+', suffix: 'hours' },
-  { icon: Gamepad2, label: 'Games Played', value: '200+', suffix: 'titles' },
-  { icon: Book, label: 'Books Read', value: '30+', suffix: 'tech books' },
-  { icon: Plane, label: 'Cities Visited', value: '15+', suffix: 'places' },
+  { 
+    icon: GraduationCap, 
+    emoji: '🎓',
+    title: 'Studying Computer Science at Technocrats, Bhopal (4th Year)',
+  },
+  { 
+    icon: Code2, 
+    emoji: '💻',
+    title: 'Solved 370+ DSA problems with 50+ day coding streak',
+  },
+  { 
+    icon: Award, 
+    emoji: '🏆',
+    title: 'Oracle certified in Cloud Professional',
+  },
 ];
 
 const FunFacts = () => {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
   return (
     <section className="py-20 md:py-32 relative overflow-hidden">
       {/* Background Glow */}
@@ -27,24 +39,36 @@ const FunFacts = () => {
           </p>
         </div>
 
-        {/* Fun Facts Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+        {/* Fun Facts Grid - 3 Cards */}
+        <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
           {funFacts.map((fact, index) => (
             <div
-              key={fact.label}
-              className="group text-center p-6 rounded-2xl bg-card/30 backdrop-blur-sm border border-border hover:border-primary/30 hover:bg-primary/5 transition-all duration-500"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              key={index}
+              className="group text-center p-8 rounded-2xl bg-secondary/80 backdrop-blur-sm border border-border hover:border-primary/50 hover:bg-secondary transition-all duration-500 hover:shadow-xl hover:shadow-primary/10 cursor-pointer"
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
             >
-              <div className="w-14 h-14 mx-auto mb-4 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
-                <fact.icon className="text-primary" size={24} />
+              {/* Emoji Icon */}
+              <div className={`text-5xl mb-6 transition-all duration-300 ${hoveredIndex === index ? 'scale-125 animate-bounce' : ''}`}>
+                {fact.emoji}
               </div>
-              <div className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-1">
-                {fact.value}
-              </div>
-              <div className="text-xs text-muted-foreground">{fact.suffix}</div>
-              <div className="text-sm text-muted-foreground mt-2 font-medium">{fact.label}</div>
+              
+              {/* Title */}
+              <p className="text-foreground font-medium leading-relaxed">
+                {fact.title}
+              </p>
             </div>
           ))}
+        </div>
+
+        {/* Quote Card */}
+        <div className="mt-12 max-w-3xl mx-auto">
+          <div className="p-8 rounded-2xl bg-secondary/80 backdrop-blur-sm border border-border hover:border-primary/50 transition-all duration-500 text-center hover:shadow-xl hover:shadow-primary/10">
+            <p className="text-xl md:text-2xl text-foreground italic font-light leading-relaxed">
+              "Code is like humor. When you have to explain it, it's bad."
+            </p>
+            <p className="text-primary mt-4 font-medium">— Cory House</p>
+          </div>
         </div>
       </div>
     </section>

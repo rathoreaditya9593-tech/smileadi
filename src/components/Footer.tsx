@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { Github, Linkedin, Twitter, Instagram, Heart, MapPin, Mail, Phone } from 'lucide-react';
 import { Button } from './ui/button';
+import { useToast } from '@/hooks/use-toast';
 
 const quickLinks = [
   { label: 'Home', href: '#home' },
@@ -10,14 +12,17 @@ const quickLinks = [
 ];
 
 const socialLinks = [
-  { icon: Github, href: '#', label: 'GitHub' },
-  { icon: Linkedin, href: '#', label: 'LinkedIn' },
-  { icon: Twitter, href: '#', label: 'Twitter' },
-  { icon: Instagram, href: '#', label: 'Instagram' },
+  { icon: Github, href: 'https://github.com/rathoreaditya9593-tech?tab=repositories', label: 'GitHub' },
+  { icon: Linkedin, href: 'https://www.linkedin.com/in/aditya-rathore-7546472bb?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app', label: 'LinkedIn' },
+  { icon: Twitter, href: 'https://x.com/AdityaRath19621', label: 'Twitter' },
+  { icon: Instagram, href: 'https://www.instagram.com/smile_adi9617?igsh=dTI5bGx2dWg1aXNk', label: 'Instagram' },
 ];
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const [likes, setLikes] = useState(0);
+  const [hasLiked, setHasLiked] = useState(false);
+  const { toast } = useToast();
 
   const handleLinkClick = (href: string) => {
     const element = document.querySelector(href);
@@ -26,8 +31,35 @@ const Footer = () => {
     }
   };
 
+  const handleLike = () => {
+    if (!hasLiked) {
+      setLikes(prev => prev + 1);
+      setHasLiked(true);
+      
+      // Send notification via mailto
+      const mailtoLink = `mailto:rathoreaditya9617@gmail.com?subject=Someone liked your portfolio!&body=Someone just liked your portfolio website! Total likes: ${likes + 1}`;
+      
+      // Create invisible iframe to trigger mailto without redirect
+      const iframe = document.createElement('iframe');
+      iframe.style.display = 'none';
+      iframe.src = mailtoLink;
+      document.body.appendChild(iframe);
+      setTimeout(() => document.body.removeChild(iframe), 1000);
+
+      toast({
+        title: 'Thank you! ❤️',
+        description: 'Your appreciation means a lot to me!',
+      });
+    } else {
+      toast({
+        title: 'Already Liked!',
+        description: 'You have already shown your appreciation.',
+      });
+    }
+  };
+
   return (
-    <footer className="py-16 border-t border-border bg-card/30 backdrop-blur-sm">
+    <footer className="py-16 border-t border-border bg-secondary/50 backdrop-blur-sm">
       <div className="container mx-auto">
         <div className="grid md:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
@@ -44,7 +76,9 @@ const Footer = () => {
                 <a
                   key={social.label}
                   href={social.href}
-                  className="w-10 h-10 rounded-full bg-secondary/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-all duration-300"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-card/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-all duration-300"
                   aria-label={social.label}
                 >
                   <social.icon size={18} />
@@ -80,7 +114,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center gap-2 text-muted-foreground text-sm">
                 <Phone size={16} className="text-primary" />
-                +91 98765 43210
+                +91 96170 42206
               </li>
               <li className="flex items-center gap-2 text-muted-foreground text-sm">
                 <MapPin size={16} className="text-primary" />
@@ -101,34 +135,55 @@ const Footer = () => {
             </Button>
           </div>
 
-          {/* Another Get in Touch */}
+          {/* Resume & Links */}
           <div>
-            <h4 className="font-heading font-semibold text-foreground mb-4">Get In Touch</h4>
+            <h4 className="font-heading font-semibold text-foreground mb-4">Resume</h4>
             <p className="text-muted-foreground text-sm mb-4">
-              rathoreaditya9617@gmail.com
-            </p>
-            <p className="text-muted-foreground text-sm mb-4">
-              Bhopal, India
+              Check out my resume to learn more about my experience and skills.
             </p>
             <Button
               variant="outline"
               size="sm"
-              onClick={() => handleLinkClick('#contact')}
+              onClick={() => window.open('https://www.canva.com/design/DAG8aEY5ycM/oQ0YUu2m-Xyllb69ZrLKnA/view?utm_content=DAG8aEY5ycM&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hb422fe51ba', '_blank')}
             >
-              <span className="relative flex h-2 w-2 mr-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-              </span>
-              Available for work
+              View Resume
             </Button>
           </div>
         </div>
 
         {/* Bottom */}
         <div className="pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
-          <span className="text-muted-foreground text-sm flex items-center gap-1">
-            © {currentYear} Aditya. Made with <Heart size={14} className="text-primary" /> Using React & Tailwind CSS
-          </span>
+          <div className="flex items-center gap-4">
+            <span className="text-muted-foreground text-sm">
+              © {currentYear} <span className="text-primary font-semibold">Smile_adi</span>
+            </span>
+            <span className="text-muted-foreground text-sm flex items-center gap-1">
+              Made with <Heart size={14} className="text-primary" /> Using React & Tailwind CSS
+            </span>
+          </div>
+          
+          {/* Like Button */}
+          <button
+            onClick={handleLike}
+            className={`flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-300 ${
+              hasLiked 
+                ? 'bg-primary/20 border-primary text-primary' 
+                : 'bg-card/50 border-border text-muted-foreground hover:border-primary hover:text-primary'
+            }`}
+          >
+            <Heart 
+              size={18} 
+              className={hasLiked ? 'fill-primary' : ''} 
+            />
+            <span className="text-sm font-medium">
+              {hasLiked ? 'Liked!' : 'Like this portfolio'}
+            </span>
+            {likes > 0 && (
+              <span className="bg-primary text-primary-foreground text-xs px-2 py-0.5 rounded-full">
+                {likes}
+              </span>
+            )}
+          </button>
         </div>
       </div>
     </footer>

@@ -1,28 +1,31 @@
-import { ExternalLink, Github } from 'lucide-react';
+import { useState } from 'react';
+import { ExternalLink, Github, Lock, Sparkles } from 'lucide-react';
 import { Button } from './ui/button';
 
 const projects = [
   {
-    title: 'Account Management System',
-    description: 'A comprehensive account management system for Smart Tractor company with login, notifications and more features.',
-    tags: ['React', 'Node.js', 'MongoDB', 'Stripe'],
+    title: 'SigmaGPT Chatbot',
+    description: 'An intelligent AI-powered chatbot built with modern web technologies for seamless conversation experiences.',
+    tags: ['React.js', 'Node.js', 'MongoDB'],
     liveUrl: '#',
     githubUrl: '#',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop',
+    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=500&fit=crop',
     category: 'Full Stack',
   },
   {
-    title: 'E-Commerce Platform',
-    description: 'A full-featured online shopping platform with cart, checkout, and payment integration.',
-    tags: ['Next.js', 'TypeScript', 'PostgreSQL', 'Stripe'],
+    title: 'Dynamic Portfolio',
+    description: 'A modern, responsive portfolio website showcasing projects and skills with beautiful animations.',
+    tags: ['Tailwind CSS', 'React.js'],
     liveUrl: '#',
     githubUrl: '#',
-    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=500&fit=crop',
-    category: 'Full Stack',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop',
+    category: 'Frontend',
   },
 ];
 
 const Projects = () => {
+  const [showSecretMessage, setShowSecretMessage] = useState(false);
+
   return (
     <section id="projects" className="py-20 md:py-32 relative">
       {/* Background accent */}
@@ -61,7 +64,7 @@ const Projects = () => {
           {projects.map((project, index) => (
             <div
               key={project.title}
-              className="group relative overflow-hidden rounded-2xl bg-card/30 backdrop-blur-sm border border-border hover:border-primary/30 transition-all duration-500"
+              className="group relative overflow-hidden rounded-2xl bg-secondary/80 backdrop-blur-sm border border-border hover:border-primary/50 transition-all duration-500 hover:shadow-xl hover:shadow-primary/10"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               {/* Project Image */}
@@ -71,7 +74,7 @@ const Projects = () => {
                   alt={project.title}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/50 to-transparent" />
                 
                 {/* Category Badge */}
                 <div className="absolute top-4 left-4">
@@ -113,7 +116,7 @@ const Projects = () => {
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-3 py-1 rounded-lg bg-secondary/50 text-xs text-muted-foreground"
+                      className="px-3 py-1 rounded-lg bg-card/80 text-xs text-muted-foreground border border-border"
                     >
                       {tag}
                     </span>
@@ -126,9 +129,30 @@ const Projects = () => {
 
         {/* View All Button */}
         <div className="text-center mt-12">
-          <Button variant="outline" size="lg">
+          <Button 
+            variant="outline" 
+            size="lg"
+            onClick={() => setShowSecretMessage(!showSecretMessage)}
+            className="group"
+          >
+            <Lock size={18} className="mr-2 group-hover:hidden" />
+            <Sparkles size={18} className="mr-2 hidden group-hover:block" />
             View All Projects
           </Button>
+          
+          {/* Secret Project Message */}
+          {showSecretMessage && (
+            <div className="mt-8 p-6 rounded-2xl bg-secondary/80 border border-primary/30 max-w-2xl mx-auto animate-fade-in">
+              <div className="flex items-center justify-center gap-3 mb-3">
+                <Sparkles className="text-primary" size={24} />
+                <h4 className="font-heading text-xl font-semibold text-gradient">Secret Projects</h4>
+                <Sparkles className="text-primary" size={24} />
+              </div>
+              <p className="text-muted-foreground text-center">
+                Working on <span className="text-primary font-semibold">Industry Level Secret Projects</span> that showcase advanced skills and innovative solutions. Stay tuned for updates!
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </section>

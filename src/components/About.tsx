@@ -1,10 +1,19 @@
 import { Code, Award, Briefcase, GraduationCap } from 'lucide-react';
 
 const stats = [
-  { icon: Code, value: '50+', label: 'Projects' },
-  { icon: Award, value: '5+', label: 'Years Experience' },
-  { icon: Briefcase, value: '30+', label: 'Happy Clients' },
-  { icon: GraduationCap, value: 'B.Tech', label: 'CSE Graduate' },
+  { icon: Briefcase, value: '2+', label: 'Years Experience' },
+  { icon: GraduationCap, value: '4th', label: 'Current Year' },
+  { icon: Award, value: '3+', label: 'Certifications' },
+  { icon: Code, value: '370+', label: 'DSA Problems' },
+];
+
+const coreStrengths = [
+  'Problem Solving',
+  'Critical Thinking',
+  'Adaptability',
+  'MERN Stack',
+  'Full Stack Development',
+  'Database Management',
 ];
 
 const About = () => {
@@ -27,19 +36,29 @@ const About = () => {
             </h3>
             
             <p className="text-muted-foreground leading-relaxed">
-              I'm a passionate developer with a keen eye for creating elegant solutions. 
-              My journey in web development started during my college years, and since then, 
-              I've been on an exciting path of continuous learning and growth.
-            </p>
-            
-            <p className="text-muted-foreground leading-relaxed">
-              I specialize in building responsive web applications using modern technologies 
-              like React, TypeScript, and Node.js. I believe in writing clean, maintainable 
-              code that makes a real impact.
+              Currently completing my Node.js certification and continuously improving my skills through 370+ DSA problems on LeetCode. I'm actively seeking internship opportunities to apply my skills in professional environments and contribute to innovative projects.
             </p>
 
+            {/* Core Strengths */}
+            <div className="pt-4">
+              <h4 className="font-heading text-xl font-semibold text-foreground mb-4">
+                Core Strengths
+              </h4>
+              <div className="grid grid-cols-2 gap-3">
+                {coreStrengths.map((strength) => (
+                  <div
+                    key={strength}
+                    className="flex items-center gap-2 text-muted-foreground"
+                  >
+                    <div className="w-2 h-2 rounded-full bg-primary" />
+                    <span className="text-sm">{strength}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
             <div className="flex flex-wrap gap-3 pt-4">
-              {['React', 'TypeScript', 'Node.js', 'Tailwind CSS', 'MongoDB'].map((tech) => (
+              {['React', 'Node.js', 'Tailwind CSS', 'MongoDB'].map((tech) => (
                 <span
                   key={tech}
                   className="px-4 py-2 rounded-full bg-secondary text-sm font-medium text-foreground border border-border"
@@ -52,12 +71,13 @@ const About = () => {
 
           {/* Right - Stats */}
           <div className="grid grid-cols-2 gap-4">
-            {stats.map((stat) => (
+            {stats.map((stat, index) => (
               <div
                 key={stat.label}
-                className="bg-gradient-card backdrop-blur-sm border border-border rounded-2xl p-6 text-center hover:border-primary/30 transition-all duration-300 group"
+                className="bg-secondary/80 backdrop-blur-sm border border-border rounded-2xl p-6 text-center hover:border-primary/50 hover:bg-secondary transition-all duration-300 group hover:shadow-lg hover:shadow-primary/10"
+                style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
+                <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
                   <stat.icon className="text-primary" size={28} />
                 </div>
                 <div className="font-heading text-3xl md:text-4xl font-bold text-gradient mb-1">

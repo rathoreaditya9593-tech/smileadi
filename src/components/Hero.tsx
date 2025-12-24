@@ -57,14 +57,16 @@ const Hero = () => {
           {/* Social Links */}
           <div className="flex justify-center gap-4 animate-fade-up" style={{ animationDelay: '0.6s' }}>
             {[
-              { icon: Github, href: '#', label: 'GitHub' },
-              { icon: Linkedin, href: '#', label: 'LinkedIn' },
-              { icon: Twitter, href: '#', label: 'Twitter' },
-              { icon: Instagram, href: '#', label: 'Instagram' },
+              { icon: Github, href: 'https://github.com/rathoreaditya9593-tech?tab=repositories', label: 'GitHub' },
+              { icon: Linkedin, href: 'https://www.linkedin.com/in/aditya-rathore-7546472bb?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app', label: 'LinkedIn' },
+              { icon: Twitter, href: 'https://x.com/AdityaRath19621', label: 'Twitter' },
+              { icon: Instagram, href: 'https://www.instagram.com/smile_adi9617?igsh=dTI5bGx2dWg1aXNk', label: 'Instagram' },
             ].map((social) => (
               <a
                 key={social.label}
                 href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-12 h-12 rounded-full border border-border bg-card/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 hover:bg-primary/10 hover:scale-110 transition-all duration-300"
                 aria-label={social.label}
               >
