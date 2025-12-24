@@ -16,7 +16,7 @@ const Hero = () => {
                 <div className="w-full h-full rounded-full bg-card overflow-hidden">
                   <img
                     src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face"
-                    alt="Ashish Sharma - Professional Developer"
+                    alt="Aditya Rathore - Professional Developer"
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -39,9 +39,9 @@ const Hero = () => {
 
           {/* Name */}
           <h1 className="font-heading text-5xl md:text-7xl lg:text-8xl font-bold mb-6 animate-fade-up" style={{ animationDelay: '0.3s' }}>
-            <span className="text-gradient">Ashish</span>
+            <span className="text-gradient">Aditya</span>
             <br />
-            <span className="text-gradient">Sharma</span>
+            <span className="text-gradient">Rathore</span>
           </h1>
 
           {/* Dynamic Role TypeWriter */}
