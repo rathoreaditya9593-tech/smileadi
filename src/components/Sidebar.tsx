@@ -40,7 +40,7 @@ const Sidebar = ({ activeSection }: SidebarProps) => {
   };
 
   const handleDownloadResume = () => {
-    alert('Resume download would start here. Connect your actual resume PDF!');
+    window.open('https://www.canva.com/design/DAG8aEY5ycM/oQ0YUu2m-Xyllb69ZrLKnA/view?utm_content=DAG8aEY5ycM&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hb422fe51ba', '_blank');
   };
 
   return (
@@ -93,7 +93,7 @@ const Sidebar = ({ activeSection }: SidebarProps) => {
               "font-heading font-bold text-xl text-gradient ml-3 transition-all duration-300",
               isExpanded || isMobileOpen ? "opacity-100 translate-x-0" : "opacity-0 translate-x-4 hidden md:block md:invisible"
             )}>
-              Ashish.
+              Aditya.
             </span>
           </div>
 

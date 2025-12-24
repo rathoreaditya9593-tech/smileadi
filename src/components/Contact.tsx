@@ -13,8 +13,8 @@ const contactInfo = [
   {
     icon: Phone,
     label: 'Phone',
-    value: '+91 98765 43210',
-    href: 'tel:+919876543210',
+    value: '+91 96170 42206',
+    href: 'tel:+919617042206',
   },
   {
     icon: MapPin,
@@ -37,12 +37,13 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    // Send email via mailto with pre-filled content
+    const mailtoLink = `mailto:rathoreaditya9617@gmail.com?subject=Message from ${encodeURIComponent(formData.name)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
+    window.open(mailtoLink, '_blank');
 
     toast({
-      title: 'Message Sent!',
-      description: "Thank you for reaching out. I'll get back to you soon.",
+      title: 'Opening Email Client!',
+      description: "Your email client will open with the message. Thank you for reaching out!",
     });
 
     setFormData({ name: '', email: '', message: '' });
@@ -84,7 +85,7 @@ const Contact = () => {
               <a
                 key={info.label}
                 href={info.href}
-                className="flex items-center gap-4 p-4 rounded-xl bg-gradient-card border border-border hover:border-primary/30 transition-all duration-300 group"
+                className="flex items-center gap-4 p-4 rounded-xl bg-secondary/60 border border-border hover:border-primary/30 transition-all duration-300 group"
               >
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                   <info.icon className="text-primary" size={22} />
@@ -98,7 +99,7 @@ const Contact = () => {
           </div>
 
           {/* Contact Form */}
-          <div className="bg-gradient-card backdrop-blur-sm border border-border rounded-2xl p-6 md:p-8">
+          <div className="bg-secondary/60 backdrop-blur-sm border border-border rounded-2xl p-6 md:p-8">
             <h3 className="font-heading text-2xl font-semibold text-foreground mb-6">
               Send Message
             </h3>
@@ -115,7 +116,7 @@ const Contact = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 rounded-xl bg-secondary/50 border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors"
+                  className="w-full px-4 py-3 rounded-xl bg-card/50 border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors"
                   placeholder="John Doe"
                 />
               </div>
@@ -131,7 +132,7 @@ const Contact = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 rounded-xl bg-secondary/50 border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors"
+                  className="w-full px-4 py-3 rounded-xl bg-card/50 border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors"
                   placeholder="john@example.com"
                 />
               </div>
@@ -147,7 +148,7 @@ const Contact = () => {
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-3 rounded-xl bg-secondary/50 border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors resize-none"
+                  className="w-full px-4 py-3 rounded-xl bg-card/50 border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors resize-none"
                   placeholder="Tell me about your project..."
                 />
               </div>

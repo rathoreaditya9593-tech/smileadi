@@ -16,7 +16,6 @@ const skillCategories = [
     skills: [
       { name: 'Node.js', icon: '🟢', percentage: 88 },
       { name: 'Express', icon: '⚡', percentage: 85 },
-      { name: 'Python', icon: '🐍', percentage: 75 },
     ],
   },
   {
@@ -24,20 +23,18 @@ const skillCategories = [
     skills: [
       { name: 'MongoDB', icon: '🍃', percentage: 85 },
       { name: 'PostgreSQL', icon: '🐘', percentage: 80 },
-      { name: 'Firebase', icon: '🔥', percentage: 75 },
     ],
   },
   {
     title: 'Tools & Others',
     skills: [
       { name: 'Git', icon: '📦', percentage: 90 },
-      { name: 'Docker', icon: '🐳', percentage: 75 },
-      { name: 'AWS', icon: '☁️', percentage: 70 },
+      { name: 'Microsoft Azure', icon: '☁️', percentage: 75 },
     ],
   },
 ];
 
-const currentlyLearning = ['Next.js', 'Three.js', 'React Native', 'Blockchain'];
+const currentlyLearning = ['GSAP', 'SpringBoot', 'SpringAI', 'Docker'];
 
 const SkillBar = ({ skill, delay }: { skill: { name: string; icon: string; percentage: number }; delay: number }) => {
   const [width, setWidth] = useState(0);
