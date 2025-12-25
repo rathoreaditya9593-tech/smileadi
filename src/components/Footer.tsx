@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Github, Linkedin, Twitter, Instagram, Heart, MapPin, Mail, Phone } from 'lucide-react';
 import { Button } from './ui/button';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 
 const quickLinks = [
   { label: 'Home', href: '#home' },
@@ -15,13 +16,16 @@ const socialLinks = [
   { icon: Github, href: 'https://github.com/rathoreaditya9593-tech?tab=repositories', label: 'GitHub' },
   { icon: Linkedin, href: 'https://www.linkedin.com/in/aditya-rathore-7546472bb?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app', label: 'LinkedIn' },
   { icon: Twitter, href: 'https://x.com/AdityaRath19621', label: 'Twitter' },
-  { icon: Instagram, href: 'https://www.instagram.com/smile_adi9617?igsh=dTI5bGx2dWg1aXNk', label: 'Instagram' },
+  { icon: Instagram, href: 'https://www.instagram.com/smile_adi9617/#', label: 'Instagram' },
 ];
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const [likes, setLikes] = useState(0);
   const [hasLiked, setHasLiked] = useState(false);
+  const [isLiking, setIsLiking] = useState(false);
+  const [likerEmail, setLikerEmail] = useState('');
+  const [showEmailInput, setShowEmailInput] = useState(false);
   const { toast } = useToast();
 
   const handleLinkClick = (href: string) => {
@@ -31,30 +35,52 @@ const Footer = () => {
     }
   };
 
-  const handleLike = () => {
-    if (!hasLiked) {
-      setLikes(prev => prev + 1);
-      setHasLiked(true);
-      
-      // Send notification via mailto
-      const mailtoLink = `mailto:rathoreaditya9617@gmail.com?subject=Someone liked your portfolio!&body=Someone just liked your portfolio website! Total likes: ${likes + 1}`;
-      
-      // Create invisible iframe to trigger mailto without redirect
-      const iframe = document.createElement('iframe');
-      iframe.style.display = 'none';
-      iframe.src = mailtoLink;
-      document.body.appendChild(iframe);
-      setTimeout(() => document.body.removeChild(iframe), 1000);
-
-      toast({
-        title: 'Thank you! ❤️',
-        description: 'Your appreciation means a lot to me!',
-      });
-    } else {
+  const handleLike = async () => {
+    if (hasLiked) {
       toast({
         title: 'Already Liked!',
         description: 'You have already shown your appreciation.',
       });
+      return;
+    }
+
+    if (!showEmailInput) {
+      setShowEmailInput(true);
+      return;
+    }
+
+    setIsLiking(true);
+
+    try {
+      const { data, error } = await supabase.functions.invoke('send-like-email', {
+        body: {
+          likerEmail: likerEmail || 'Anonymous',
+        },
+      });
+
+      if (error) throw error;
+
+      setLikes(prev => prev + 1);
+      setHasLiked(true);
+      setShowEmailInput(false);
+      
+      toast({
+        title: 'Thank you! ❤️',
+        description: 'Your appreciation means a lot to me!',
+      });
+    } catch (error: any) {
+      console.error('Error sending like notification:', error);
+      // Still count the like even if email fails
+      setLikes(prev => prev + 1);
+      setHasLiked(true);
+      setShowEmailInput(false);
+      
+      toast({
+        title: 'Thank you! ❤️',
+        description: 'Your appreciation has been noted!',
+      });
+    } finally {
+      setIsLiking(false);
     }
   };
 
@@ -162,28 +188,40 @@ const Footer = () => {
             </span>
           </div>
           
-          {/* Like Button */}
-          <button
-            onClick={handleLike}
-            className={`flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-300 ${
-              hasLiked 
-                ? 'bg-primary/20 border-primary text-primary' 
-                : 'bg-card/50 border-border text-muted-foreground hover:border-primary hover:text-primary'
-            }`}
-          >
-            <Heart 
-              size={18} 
-              className={hasLiked ? 'fill-primary' : ''} 
-            />
-            <span className="text-sm font-medium">
-              {hasLiked ? 'Liked!' : 'Like this portfolio'}
-            </span>
-            {likes > 0 && (
-              <span className="bg-primary text-primary-foreground text-xs px-2 py-0.5 rounded-full">
-                {likes}
-              </span>
+          {/* Like Button with Email Input */}
+          <div className="flex items-center gap-3">
+            {showEmailInput && !hasLiked && (
+              <input
+                type="email"
+                placeholder="Your email (optional)"
+                value={likerEmail}
+                onChange={(e) => setLikerEmail(e.target.value)}
+                className="px-3 py-2 rounded-full bg-card/50 border border-border text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors w-48"
+              />
             )}
-          </button>
+            <button
+              onClick={handleLike}
+              disabled={isLiking}
+              className={`flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-300 ${
+                hasLiked 
+                  ? 'bg-primary/20 border-primary text-primary' 
+                  : 'bg-card/50 border-border text-muted-foreground hover:border-primary hover:text-primary'
+              } ${isLiking ? 'opacity-50 cursor-not-allowed' : ''}`}
+            >
+              <Heart 
+                size={18} 
+                className={hasLiked ? 'fill-primary' : ''} 
+              />
+              <span className="text-sm font-medium">
+                {isLiking ? 'Sending...' : hasLiked ? 'Liked!' : showEmailInput ? 'Submit' : 'Like this portfolio'}
+              </span>
+              {likes > 0 && (
+                <span className="bg-primary text-primary-foreground text-xs px-2 py-0.5 rounded-full">
+                  {likes}
+                </span>
+              )}
+            </button>
+          </div>
         </div>
       </div>
     </footer>
