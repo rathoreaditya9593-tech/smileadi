@@ -1,5 +1,6 @@
 import { Github, Linkedin, Twitter, Instagram } from 'lucide-react';
 import TypeWriter from './TypeWriter';
+import profilePhoto from '@/assets/profile-photo.png';
 
 const Hero = () => {
   return (
@@ -9,26 +10,39 @@ const Hero = () => {
       
       <div className="container mx-auto text-center relative z-10">
         <div className="max-w-3xl mx-auto">
-          {/* Profile Image */}
+          {/* Profile Image with Dynamic Effects */}
           <div className="mb-8 animate-fade-up" style={{ animationDelay: '0.1s' }}>
             <div className="relative inline-block">
-              <div className="w-40 h-40 md:w-52 md:h-52 rounded-full bg-gradient-primary p-1 animate-float">
-                <div className="w-full h-full rounded-full bg-card overflow-hidden">
+              {/* Outer thundering ring */}
+              <div className="absolute -inset-3 rounded-full animate-thunder" />
+              
+              {/* Electric rotating ring */}
+              <div className="absolute -inset-2 rounded-full border-2 border-primary/60 animate-electric-ring" />
+              
+              {/* Inner vibrating ring */}
+              <div className="absolute -inset-1 rounded-full border border-accent/40 animate-pulse-slow" />
+              
+              {/* Main profile container */}
+              <div className="w-40 h-40 md:w-52 md:h-52 rounded-full bg-gradient-primary p-1 animate-float relative">
+                <div className="w-full h-full rounded-full bg-card overflow-hidden animate-vibrate" style={{ animationDuration: '0.5s' }}>
                   <img
-                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face"
+                    src={profilePhoto}
                     alt="Aditya Rathore - Professional Developer"
                     className="w-full h-full object-cover"
                   />
                 </div>
               </div>
+              
               {/* Glow effect */}
               <div className="absolute inset-0 rounded-full bg-primary/20 blur-xl -z-10 animate-pulse-slow" />
               
               {/* Floating particles around profile */}
-              <div className="absolute -top-2 -left-2 w-3 h-3 rounded-full bg-primary/50 animate-float" style={{ animationDelay: '0s' }} />
-              <div className="absolute top-4 -right-4 w-2 h-2 rounded-full bg-accent/50 animate-float" style={{ animationDelay: '0.5s' }} />
-              <div className="absolute -bottom-2 left-8 w-2 h-2 rounded-full bg-primary/40 animate-float" style={{ animationDelay: '1s' }} />
-              <div className="absolute bottom-8 -right-2 w-2.5 h-2.5 rounded-full bg-accent/40 animate-float" style={{ animationDelay: '1.5s' }} />
+              <div className="absolute -top-4 -left-4 w-3 h-3 rounded-full bg-primary animate-float" style={{ animationDelay: '0s' }} />
+              <div className="absolute top-2 -right-6 w-2 h-2 rounded-full bg-accent animate-float" style={{ animationDelay: '0.5s' }} />
+              <div className="absolute -bottom-4 left-6 w-2 h-2 rounded-full bg-primary/80 animate-float" style={{ animationDelay: '1s' }} />
+              <div className="absolute bottom-6 -right-4 w-2.5 h-2.5 rounded-full bg-accent/80 animate-float" style={{ animationDelay: '1.5s' }} />
+              <div className="absolute top-1/2 -left-6 w-1.5 h-1.5 rounded-full bg-primary/60 animate-float" style={{ animationDelay: '2s' }} />
+              <div className="absolute top-1/2 -right-6 w-1.5 h-1.5 rounded-full bg-accent/60 animate-float" style={{ animationDelay: '2.5s' }} />
             </div>
           </div>
 
@@ -60,7 +74,7 @@ const Hero = () => {
               { icon: Github, href: 'https://github.com/rathoreaditya9593-tech?tab=repositories', label: 'GitHub' },
               { icon: Linkedin, href: 'https://www.linkedin.com/in/aditya-rathore-7546472bb?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app', label: 'LinkedIn' },
               { icon: Twitter, href: 'https://x.com/AdityaRath19621', label: 'Twitter' },
-              { icon: Instagram, href: 'https://www.instagram.com/smile_adi9617?igsh=dTI5bGx2dWg1aXNk', label: 'Instagram' },
+              { icon: Instagram, href: 'https://www.instagram.com/smile_adi9617/#', label: 'Instagram' },
             ].map((social) => (
               <a
                 key={social.label}
