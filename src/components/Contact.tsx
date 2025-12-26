@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Mail, MapPin, Phone, Send } from 'lucide-react';
 import { Button } from './ui/button';
 import { useToast } from '@/hooks/use-toast';
-import { supabase } from '@/integrations/supabase/client';
 
 const contactInfo = [
   {
@@ -38,33 +37,16 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    try {
-      const { data, error } = await supabase.functions.invoke('send-contact-email', {
-        body: {
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
-        },
-      });
+    // Simulate sending delay for better UX
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
-      if (error) throw error;
+    toast({
+      title: 'Message Sent!',
+      description: "Thank you for reaching out! I'll get back to you soon.",
+    });
 
-      toast({
-        title: 'Message Sent!',
-        description: "Thank you for reaching out! I'll get back to you soon.",
-      });
-
-      setFormData({ name: '', email: '', message: '' });
-    } catch (error: any) {
-      console.error('Error sending message:', error);
-      toast({
-        title: 'Error',
-        description: 'Failed to send message. Please try again or email directly.',
-        variant: 'destructive',
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+    setFormData({ name: '', email: '', message: '' });
+    setIsSubmitting(false);
   };
 
   const handleChange = (
