@@ -24,7 +24,7 @@ const Hero = () => {
               
               {/* Main profile container */}
               <div className="w-40 h-40 md:w-52 md:h-52 rounded-full bg-gradient-primary p-1 animate-float relative">
-                <div className="w-full h-full rounded-full bg-card overflow-hidden animate-vibrate" style={{ animationDuration: '0.5s' }}>
+                <div className="w-full h-full rounded-full bg-card overflow-hidden">
                   <img
                     src={profilePhoto}
                     alt="Aditya Rathore - Professional Developer"
@@ -36,13 +36,15 @@ const Hero = () => {
               {/* Glow effect */}
               <div className="absolute inset-0 rounded-full bg-primary/20 blur-xl -z-10 animate-pulse-slow" />
               
-              {/* Floating particles around profile */}
-              <div className="absolute -top-4 -left-4 w-3 h-3 rounded-full bg-primary animate-float" style={{ animationDelay: '0s' }} />
-              <div className="absolute top-2 -right-6 w-2 h-2 rounded-full bg-accent animate-float" style={{ animationDelay: '0.5s' }} />
-              <div className="absolute -bottom-4 left-6 w-2 h-2 rounded-full bg-primary/80 animate-float" style={{ animationDelay: '1s' }} />
-              <div className="absolute bottom-6 -right-4 w-2.5 h-2.5 rounded-full bg-accent/80 animate-float" style={{ animationDelay: '1.5s' }} />
-              <div className="absolute top-1/2 -left-6 w-1.5 h-1.5 rounded-full bg-primary/60 animate-float" style={{ animationDelay: '2s' }} />
-              <div className="absolute top-1/2 -right-6 w-1.5 h-1.5 rounded-full bg-accent/60 animate-float" style={{ animationDelay: '2.5s' }} />
+              {/* Floating transparent stars around profile */}
+              <div className="absolute -top-6 -left-4 text-primary/40 animate-float text-lg" style={{ animationDelay: '0s', animationDuration: '4s' }}>✦</div>
+              <div className="absolute top-0 -right-8 text-accent/30 animate-float text-xl" style={{ animationDelay: '0.5s', animationDuration: '5s' }}>★</div>
+              <div className="absolute -bottom-6 left-4 text-primary/35 animate-float text-sm" style={{ animationDelay: '1s', animationDuration: '4.5s' }}>✦</div>
+              <div className="absolute bottom-4 -right-6 text-accent/40 animate-float text-base" style={{ animationDelay: '1.5s', animationDuration: '3.5s' }}>✧</div>
+              <div className="absolute top-1/3 -left-8 text-primary/25 animate-float text-xs" style={{ animationDelay: '2s', animationDuration: '5.5s' }}>★</div>
+              <div className="absolute top-2/3 -right-8 text-accent/35 animate-float text-sm" style={{ animationDelay: '2.5s', animationDuration: '4s' }}>✦</div>
+              <div className="absolute -top-2 left-1/3 text-primary/30 animate-float text-xs" style={{ animationDelay: '3s', animationDuration: '6s' }}>✧</div>
+              <div className="absolute -bottom-4 right-1/3 text-accent/25 animate-float text-lg" style={{ animationDelay: '3.5s', animationDuration: '5s' }}>★</div>
             </div>
           </div>
 
@@ -74,7 +76,7 @@ const Hero = () => {
               { icon: Github, href: 'https://github.com/rathoreaditya9593-tech?tab=repositories', label: 'GitHub' },
               { icon: Linkedin, href: 'https://www.linkedin.com/in/aditya-rathore-7546472bb?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app', label: 'LinkedIn' },
               { icon: Twitter, href: 'https://x.com/AdityaRath19621', label: 'Twitter' },
-              { icon: Instagram, href: 'https://www.instagram.com/smile_adi9617/#', label: 'Instagram' },
+              { icon: Instagram, href: 'https://www.instagram.com/smile_adi9617?igsh=dTI5bGx2dWg1aXNk', label: 'Instagram' },
             ].map((social) => (
               <a
                 key={social.label}
