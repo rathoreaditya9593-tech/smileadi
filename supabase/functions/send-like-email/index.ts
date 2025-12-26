@@ -36,7 +36,7 @@ const handler = async (req: Request): Promise<Response> => {
       },
       body: JSON.stringify({
         from: "Portfolio Notification <onboarding@resend.dev>",
-        to: ["rathoreaditya9617@gmail.com"],
+        to: ["rathoreaditya9593@gmail.com"],
         subject: "🎉 Someone liked your portfolio!",
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
