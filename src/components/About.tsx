@@ -74,7 +74,7 @@ const About = () => {
             {stats.map((stat, index) => (
               <div
                 key={stat.label}
-                className="bg-secondary/80 backdrop-blur-sm border border-border rounded-2xl p-6 text-center hover:border-primary/50 hover:bg-secondary transition-all duration-300 group hover:shadow-lg hover:shadow-primary/10"
+                className="bg-secondary/95 backdrop-blur-sm border border-border rounded-2xl p-6 text-center hover:border-primary/50 hover:bg-secondary transition-all duration-300 group hover:shadow-lg hover:shadow-primary/10"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
