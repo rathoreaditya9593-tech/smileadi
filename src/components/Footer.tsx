@@ -2,7 +2,11 @@ import { useState } from 'react';
 import { Github, Linkedin, Twitter, Instagram, Heart, MapPin, Mail, Phone } from 'lucide-react';
 import { Button } from './ui/button';
 import { useToast } from '@/hooks/use-toast';
-import { supabase } from '@/integrations/supabase/client';
+import emailjs from '@emailjs/browser';
+
+const EMAILJS_SERVICE_ID = 'service_sxx1thu';
+const EMAILJS_TEMPLATE_ID = 'template_tuf4mjo';
+const EMAILJS_PUBLIC_KEY = 'pWHy204NPE1CHD6QH';
 
 const quickLinks = [
   { label: 'Home', href: '#home' },
@@ -52,13 +56,17 @@ const Footer = () => {
     setIsLiking(true);
 
     try {
-      const { data, error } = await supabase.functions.invoke('send-like-email', {
-        body: {
-          likerEmail: likerEmail || 'Anonymous',
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name: likerEmail || 'Anonymous',
+          from_email: likerEmail || 'anonymous@portfolio.com',
+          message: `Someone liked your portfolio! Liker: ${likerEmail || 'Anonymous'}`,
+          to_email: 'rathoreaditya9617@gmail.com',
         },
-      });
-
-      if (error) throw error;
+        EMAILJS_PUBLIC_KEY
+      );
 
       setLikes(prev => prev + 1);
       setHasLiked(true);
@@ -70,7 +78,6 @@ const Footer = () => {
       });
     } catch (error: any) {
       console.error('Error sending like notification:', error);
-      // Still count the like even if email fails
       setLikes(prev => prev + 1);
       setHasLiked(true);
       setShowEmailInput(false);
