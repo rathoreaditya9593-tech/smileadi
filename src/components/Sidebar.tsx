@@ -40,7 +40,7 @@ const Sidebar = ({ activeSection }: SidebarProps) => {
   };
 
   const handleDownloadResume = () => {
-    window.open('https://www.canva.com/design/DAG8aEY5ycM/oQ0YUu2m-Xyllb69ZrLKnA/view?utm_content=DAG8aEY5ycM&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hb422fe51ba', '_blank');
+    window.open('https://drive.google.com/file/d/1ON9KuAhkZjlgTd3qjp89r5MsU6OtylnK/view?usp=drivesdk', '_blank');
   };
 
   return (
