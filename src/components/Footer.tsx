@@ -2,7 +2,11 @@ import { useState } from 'react';
 import { Github, Linkedin, Twitter, Instagram, Heart, MapPin, Mail, Phone } from 'lucide-react';
 import { Button } from './ui/button';
 import { useToast } from '@/hooks/use-toast';
-import { supabase } from '@/integrations/supabase/client';
+import emailjs from '@emailjs/browser';
+
+const EMAILJS_SERVICE_ID = 'service_sxx1thu';
+const EMAILJS_TEMPLATE_ID = 'template_tuf4mjo';
+const EMAILJS_PUBLIC_KEY = 'pWHy204NPE1CHD6QH';
 
 const quickLinks = [
   { label: 'Home', href: '#home' },
